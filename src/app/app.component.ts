@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddNewTaskComponent } from './add-new-task/add-new-task.component';
+import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
+
 
 @Component({
   selector: 'app-root',

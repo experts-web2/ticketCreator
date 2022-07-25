@@ -1,0 +1,247 @@
+<div class="new-task-popup-container">
+  <div class="head">
+    <h1 mat-dialog-title>Add Contribution</h1>
+    <button class="close" tabindex="-1" mat-button (click)="close()">X</button>
+  </div>
+  <form [formGroup]="task">
+    <div mat-dialog-content>
+      <div class="text-center"></div>
+      <div class="row">
+        <div class="col-md-4 col-12 d-flex flex-row">
+          <div class="d-flex flex-column flex-grow-1 align-items-start">
+            <mat-label>Date</mat-label>
+            <input
+              [matDatepicker]="date"
+              name="created"
+              placeholder="Choose a date"
+              formControlName="dueDate"
+              required
+            />
+            <span
+              *ngIf="
+                taskFormControls['dueDate'].invalid &&
+                (taskFormControls['dueDate'].dirty ||
+                  taskFormControls['dueDate'].touched)
+              "
+              class="alert alert-danger"
+              >Due date is required</span
+            >
+          </div>
+          <mat-datepicker-toggle
+            class="mt-4"
+            id="puple-icon"
+            matSuffix
+            [for]="date"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #date></mat-datepicker>
+        </div>
+        <div class="col-md-4 col-12">
+          <mat-checkbox class="example-margin mt-4"
+            >Project Date Filter 30+/-</mat-checkbox
+          >
+        </div>
+        <div class="col-md-4 col-12">
+          <mat-label>Created By</mat-label>
+          <input
+            type="text"
+            placeholder="Proj Manager"
+            aria-label="Number"
+            matInput
+            [matAutocomplete]="auto"
+            formControlName="projManager"
+            [value]="task.value.projManager.name"
+          />
+          <span
+            *ngIf="
+              taskFormControls['projManager'].invalid &&
+              (taskFormControls['projManager'].dirty ||
+                taskFormControls['projManager'].touched)
+            "
+            class="alert alert-danger"
+            >Name of creator required</span
+          >
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let mgr of projMgr" [value]="mgr">
+              {{ mgr.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <mat-label>Client</mat-label>
+          <mat-select formControlName="client">
+            <mat-option
+              placeholder="Client"
+              *ngFor="let client of clients"
+              [value]="client"
+            >
+              {{ client.name }}
+            </mat-option>
+          </mat-select>
+          <span
+            *ngIf="
+              taskFormControls['client'].invalid &&
+              (taskFormControls['client'].dirty ||
+                taskFormControls['client'].touched)
+            "
+            class="alert alert-danger"
+            >Client Name required</span
+          >
+        </div>
+        <div class="col-12 d-flex flex-row">
+          <div class="d-flex flex-column flex-grow-1 align-items-start">
+            <mat-label>project</mat-label>
+            <mat-label></mat-label>
+            <input matInput placeholder="Project" formControlName="projFile" />
+            <span
+              *ngIf="
+                taskFormControls['projFile'].invalid &&
+                (taskFormControls['projFile'].dirty ||
+                  taskFormControls['projFile'].touched)
+              "
+              class="alert alert-danger"
+              >Project required</span
+            >
+          </div>
+          <button mat-button><mat-icon>folder_open</mat-icon></button>
+        </div>
+        <div class="col-12 d-flex flex-row">
+          <div class="d-flex flex-column flex-grow-1 align-items-start">
+            <mat-label>Task</mat-label>
+            <input
+              matInput
+              placeholder="Task"
+              [readonly]="taskActive"
+              formControlName="task"
+            />
+            <span
+              *ngIf="
+                taskFormControls['task'].invalid &&
+                (taskFormControls['task'].dirty ||
+                  taskFormControls['task'].touched)
+              "
+              class="alert alert-danger"
+              >Task detail required</span
+            >
+          </div>
+          <button mat-button (click)="activeTaskTyping()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option *ngFor="let state of Status" [value]="state">
+              {{ state }}
+            </mat-option>
+          </mat-select>
+          <span
+            *ngIf="
+              taskFormControls['status'].invalid &&
+              (taskFormControls['status'].dirty ||
+                taskFormControls['status'].touched)
+            "
+            class="alert alert-danger"
+            >Status feild required</span
+          >
+        </div>
+        <div class="col-md-4 col-12">
+          <mat-label>Assignee</mat-label>
+          <mat-select formControlName="asignee">
+            <mat-option *ngFor="let assignee of assignees" [value]="assignee">
+              {{ assignee.name }}
+            </mat-option>
+          </mat-select>
+          <span
+            *ngIf="
+              taskFormControls['asignee'].invalid &&
+              (taskFormControls['asignee'].dirty ||
+                taskFormControls['asignee'].touched)
+            "
+            class="alert alert-danger"
+            >Assignee name required</span
+          >
+        </div>
+        <div class="col-md-4 col-12">
+          <mat-checkbox class="example-margin mt-4">Send Email</mat-checkbox>
+        </div>
+        <div class="col-md-4 col-12">
+          <mat-label>Task Type</mat-label>
+          <mat-select formControlName="taskType">
+            <mat-option *ngFor="let taskType of taskTypes" [value]="taskType">
+              {{ taskType }}
+            </mat-option>
+          </mat-select>
+          <span
+            *ngIf="
+              taskFormControls['taskType'].invalid &&
+              (taskFormControls['taskType'].dirty ||
+                taskFormControls['taskType'].touched)
+            "
+            class="alert alert-danger"
+            >Task Type required</span
+          >
+        </div>
+        <div class="col-md-4 col-12">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priority">
+            <mat-option
+              *ngFor="let priorityType of priorityTypes"
+              [value]="priorityType"
+            >
+              {{ priorityType }}
+            </mat-option>
+          </mat-select>
+          <span
+            *ngIf="
+              taskFormControls['priority'].invalid &&
+              (taskFormControls['priority'].dirty ||
+                taskFormControls['priority'].touched)
+            "
+            class="alert alert-danger"
+            >Priority feild required</span
+          >
+        </div>
+        <div class="w-100"></div>
+        <div class="col-md-6 col-12">
+          <mat-label>Notes</mat-label>
+          <textarea formControlName="notes"></textarea>
+          <span
+            *ngIf="
+              taskFormControls['notes'].invalid &&
+              (taskFormControls['notes'].dirty ||
+                taskFormControls['notes'].touched)
+            "
+            class="alert alert-danger"
+            >Notes required</span
+          >
+        </div>
+        <div class="col-md-6 col-12">
+          <mat-label>Email Notes</mat-label>
+          <textarea formControlName="emailnotes"></textarea>
+          <span
+            *ngIf="
+              taskFormControls['emailnotes'].invalid &&
+              (taskFormControls['emailnotes'].dirty ||
+                taskFormControls['emailnotes'].touched)
+            "
+            class="alert alert-danger"
+            >Email Notes required</span
+          >
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <button class="Save-and-add-btn" mat-stroked-button (click)="createTicket()">
+        Save & Add Task
+      </button>
+      <button class="Save-and-add-btn" mat-stroked-button (click)="createTicket()">
+        Save & Add Pitch/Hit
+      </button>
+      <button class="cancel-btn" mat-stroked-button (click)="close()">Cancel</button>
+      <button class="save-btn" mat-flat-button color="warn" (click)="createTicket()">Save</button>
+    </div>
+  </form>
+</div>
