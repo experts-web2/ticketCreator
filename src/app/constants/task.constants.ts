@@ -56,10 +56,15 @@ export class Constants {
     },
   ];
 
-  static readonly status =  ['Start', 'In Progress', 'Complete'];
-  static readonly taskTypes =  ['Buggs', 'UI/UX', 'API', 'Backend', 'Design'];
-  static readonly priorityTypes =  ['Low', 'Medium', 'Important', 'High', 'Very High'];
-
+  static readonly status = [
+    'Back Log',
+    'To Do',
+    'In Progress',
+    'Ready',
+    'Complete',
+  ];
+  static readonly taskTypes = ['Bug', 'Issue', 'Task', 'Story'];
+  static readonly priorityTypes = ['Low', 'Medium', 'High', 'Critical'];
 
   static readonly customer = 'Customer';
 }

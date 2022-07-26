@@ -13,4 +13,10 @@ export class ApiService {
       ticket
     );
   }
+
+  ticketList() {
+    return this.httpRequest.get(
+      'http://ec2-18-237-217-59.us-west-2.compute.amazonaws.com:3030/api/ticket/list'
+    );
+  }
 }

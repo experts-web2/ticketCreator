@@ -23,6 +23,7 @@ import {
 } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [AppComponent, AddNewTaskComponent],
@@ -44,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatAutocompleteModule,
     MatCheckboxModule,
     HttpClientModule,
+    MatTableModule
   ],
   providers: [
     {
