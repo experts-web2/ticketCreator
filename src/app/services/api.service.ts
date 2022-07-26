@@ -9,7 +9,7 @@ export class ApiService {
 
   newTicket(ticket: any) {
     return this.httpRequest.post(
-      'http://localhost:3030/api/ticket/add',
+      'http://ec2-18-237-217-59.us-west-2.compute.amazonaws.com:3030/api/ticket/add',
       ticket
     );
   }
